@@ -28,8 +28,6 @@ text1, text2 могут быть пустыми
 
 import java.io.*;
 import java.util.*;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class Solution
 {
@@ -53,12 +51,13 @@ public class Solution
         {
             result = result.substring(result.indexOf(openTag), result.lastIndexOf(closeTag)) + closeTag;
         }
-        catch (IndexOutOfBoundsException e){
+        catch (IndexOutOfBoundsException e)
+        {
             System.out.println("There is no such tag in the document");
         }
 
         Stack<String> stack = new Stack<>();
-      int i = result.indexOf(args[0]);
+        int i = result.indexOf(args[0]);
         int temp = result.indexOf(args[0], i + 1);
         while (i < result.length())
         {
@@ -74,10 +73,10 @@ public class Solution
                 i = result.indexOf(args[0], temp + args[0].length() + 1);
             } else if (result.charAt(i - 1) == '<' && result.charAt(temp - 1) == '<')
             {
-                int endTag = result.indexOf(closeTag,i);
-                int first = result.indexOf(closeTag,i);
-                int beg = result.indexOf(closeTag,i);
-                int last = result.indexOf(closeTag,i);
+                int endTag = result.indexOf(closeTag, i);
+                int first = result.indexOf(closeTag, i);
+                int beg = result.indexOf(closeTag, i);
+                int last = result.indexOf(closeTag, i);
 
                 while (beg > i)
                 {
@@ -95,14 +94,15 @@ public class Solution
                     System.out.println(stack.pop());
                 }
                 i = last + 1;
-            }
-            else if (result.charAt(i-1)=='<')
+            } else if (result.charAt(i - 1) == '<')
             {
-            temp=result.indexOf(closeTag,i);
-                System.out.println(result.substring(i - 1, temp)+closeTag);
-           i = result.indexOf(args[0], temp + args[0].length() +3);}
-            else
-            {i = result.indexOf(args[0], temp + args[0].length() +3);}
+                temp = result.indexOf(closeTag, i);
+                System.out.println(result.substring(i - 1, temp) + closeTag);
+                i = result.indexOf(args[0], temp + args[0].length() + 3);
+            } else
+            {
+                i = result.indexOf(args[0], temp + args[0].length() + 3);
+            }
         }
     }
 }
